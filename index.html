@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jogo da Média</title>
+</head>
+<body>
+  <h1>Jogo da Média</h1>
+  <p>Digite números e veja a média!</p>
+
+  <input type="number" id="numero" placeholder="Digite um número" />
+  <button onclick="adicionarNumero()">Adicionar</button>
+  <button onclick="calcularMedia()">Calcular Média</button>
+  <button onclick="resetar()">Resetar</button>
+
+  <p id="lista"></p>
+  <p id="resultado"></p>
+
+  <script>
+    const numeros = [];
+
+    function adicionarNumero() {
+      const input = document.getElementById("numero");
+      const valor = Number(input.value);
+      if (!isNaN(valor)) {
+        numeros.push(valor);
+        document.getElementById("lista").innerText = "Números: " + numeros.join(", ");
+        input.value = "";
+      }
+    }
+
+    function calcularMedia() {
+      if (numeros.length === 0) {
+        document.getElementById("resultado").innerText = "Nenhum número foi digitado!";
+        return;
+      }
+
+      const soma = numeros.reduce((acc, val) => acc + val, 0);
+      const media = soma / numeros.length;
+      document.getElementById("resultado").innerText = "Média: " + media.toFixed(2);
+    }
+
+    function resetar() {
+      numeros.length = 0;
+      document.getElementById("lista").innerText = "";
+      document.getElementById("resultado").innerText = "";
+      document.getElementById("numero").value = "";
+    }
+  </script>
+</body>
+</html>
