@@ -2,20 +2,83 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Jogo da Média</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #1CB5E0, #000046);
+      color: #fff;
+      text-align: center;
+      padding: 50px;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.2em;
+    }
+
+    input[type="number"] {
+      padding: 10px;
+      font-size: 1em;
+      border: none;
+      border-radius: 5px;
+      margin: 10px;
+      width: 200px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1em;
+      margin: 5px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    button:nth-child(2) { background-color: #28a745; color: white; }
+    button:nth-child(3) { background-color: #ffc107; color: black; }
+    button:nth-child(4) { background-color: #dc3545; color: white; }
+
+    #lista, #resultado {
+      margin-top: 20px;
+      font-size: 1.3em;
+      font-weight: bold;
+    }
+
+    .container {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 30px;
+      border-radius: 15px;
+      max-width: 500px;
+      margin: auto;
+    }
+  </style>
 </head>
 <body>
-  <h1>Jogo da Média</h1>
-  <p>Digite números e veja a média!</p>
+  <div class="container">
+    <h1>🎯 Jogo da Média</h1>
+    <p>Digite números abaixo e veja a média calculada!</p>
 
-  <input type="number" id="numero" placeholder="Digite um número" />
-  <button onclick="adicionarNumero()">Adicionar</button>
-  <button onclick="calcularMedia()">Calcular Média</button>
-  <button onclick="resetar()">Resetar</button>
+    <input type="number" id="numero" placeholder="Digite um número"/>
+    <br/>
+    <button onclick="adicionarNumero()">Adicionar</button>
+    <button onclick="calcularMedia()">Calcular Média</button>
+    <button onclick="resetar()">Resetar</button>
 
-  <p id="lista"></p>
-  <p id="resultado"></p>
+    <p id="lista"></p>
+    <p id="resultado"></p>
+  </div>
 
   <script>
     const numeros = [];
@@ -23,7 +86,7 @@
     function adicionarNumero() {
       const input = document.getElementById("numero");
       const valor = Number(input.value);
-      if (!isNaN(valor)) {
+      if (!isNaN(valor) && input.value !== "") {
         numeros.push(valor);
         document.getElementById("lista").innerText = "Números: " + numeros.join(", ");
         input.value = "";
@@ -38,7 +101,7 @@
 
       const soma = numeros.reduce((acc, val) => acc + val, 0);
       const media = soma / numeros.length;
-      document.getElementById("resultado").innerText = "Média: " + media.toFixed(2);
+      document.getElementById("resultado").innerText = "📊 Média: " + media.toFixed(2);
     }
 
     function resetar() {
